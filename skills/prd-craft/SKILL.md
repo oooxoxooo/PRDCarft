@@ -22,7 +22,7 @@ whenToUse: Writing or revising a product requirements document; exporting an exi
 |---|---|
 | 常规「写PRD / 需求文档 / 梳理需求」（未点名其他技能） | 本技能承接 |
 | 点名 prd-workflow，或要 HTML 原型 / 设计系统 / 代码化流水线 | `prd-workflow` 技能 |
-| 点名 prd-generator，或 UML 用例建模 / 用例规格 / 数据字典，或简单功能、紧急需求的快速一次性成文 | `prd-generator` 技能 |
+| 点名 UML 用例建模 / 用例规格 / 数据字典，或功能涉及数据库表、接口字段、复杂状态流转 | 本技能承接，按 `references/dsh-enhancements.md`「用例规格与数据字典附录」追加附录节 |
 | 交互式 PRD 工作台（可交互网页原型 / 气泡标注 / 跳转画布），或从已有 Demo 代码还原产品 | `interaction-prd` 技能 |
 | 评审会预演、存活率、攻防 | `requirement-review-simulator` |
 | 竞品对标、差异化 | `competitive-product-research` |
@@ -76,7 +76,7 @@ prd-workspace/<项目名>/
 
 | 文件 | 内容 |
 |---|---|
-| `references/dsh-enhancements.md` | 增量层唯一事实源：目录约定 · 时序图+Excalidraw · 模板小增强 · Word 导出 · 质检口径 |
+| `references/dsh-enhancements.md` | 增量层唯一事实源：目录约定 · 时序图+Excalidraw · 模板小增强 · 用例规格与数据字典附录 · Word 导出 · 质检口径 |
 | `references/excalidraw-guide.md` | .excalidraw 文件结构 · 元素字段 · 时序图布局公式 · 手绘参数 · 转写自检 |
 | `references/decision-frameworks.md` | RICE · GTM 发布清单 · 30/60/90 度量 · 五技能联动 |
 | `../prd-workflow/SKILL.md` | 访谈方法论 · 两阶段模式 · PRD 输出结构 · 上游全部用法 |

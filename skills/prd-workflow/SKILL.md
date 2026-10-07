@@ -489,8 +489,8 @@ PRD 生成时复用 Wiki：
 ### ❌ 不推荐
 | 场景 | 推荐替代 |
 |------|---------|
-| 简单功能 | `prd-generator`（快速模式） |
-| 紧急需求 | `prd-generator`（5 模块） |
+| 简单功能 | `prd-craft` lite 模式（PRDCraft 补丁：原指 prd-generator，v3.3.0 已吸收为 prd-craft 增量层附录） |
+| 紧急需求 | `prd-craft` lite 模式（PRDCraft 补丁：原指 prd-generator，v3.3.0 已吸收为 prd-craft 增量层附录） |
 | 技术方案 | `technical-spec` skill |
 
 ---

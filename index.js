@@ -6,7 +6,9 @@
  *
  * - prd-craft                        DSH-native orchestrator (访谈→拆解→PRD→评审→导出)
  * - prd-workflow                     完整原版流水线 v5.1.0（含 workflows 代码、模板与 5 个内置子技能）
- * - prd-generator                    UML 用例驱动 PRD 生成器 v1.0.0（原版）
+ * - prd-generator                    (removed in v3.3.0: absorbed into prd-craft
+ *                                    increment layer as use-case/data-dictionary
+ *                                    appendix sections)
  * - interaction-prd                  交互式 PRD 工作台 v0.8.0（原版）
  * - competitive-product-research     竞品调研 v1.4.8（原版）
  * - requirement-review-simulator     评审模拟器 v1.2.8（原版）

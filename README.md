@@ -1,6 +1,6 @@
 # PRDCraft
 
-DSH（DeepSeek Harness）bundle · 产品管理专家技能包。安装后向会话技能目录注入 7 个技能，覆盖产品全生命周期：调研 → PRD → 评审 → MVP 验证。
+DSH（DeepSeek Harness）bundle · 产品管理专家技能包。安装后向会话技能目录注入 6 个技能，覆盖产品全生命周期：调研 → PRD → 评审 → MVP 验证。
 
 ## 技能清单
 
@@ -8,7 +8,7 @@ DSH（DeepSeek Harness）bundle · 产品管理专家技能包。安装后向会
 |---|---|---|---|
 | `prd-craft` | PRDCraft 原创主入口 | 路由器 + DSH 增量层：中文默认入口，流程/模板/检查项/门禁统一指向上游资产，叠加 Excalidraw 手绘时序图、persona、竞品节、office-docx 导出；RICE/GTM/30-60-90 决策框架 | “帮我写一个会员积分功能的 PRD” |
 | `prd-workflow` | prd-workflow v5.1.0 原版复刻 | 完整 10 步流水线（precheck→访谈→拆解→PRD→评审→流程图→设计→原型→导出→质检）+ 6 流程模板 + 版本管理 + 5 个内置子技能（ui-ux-pro-max / mermaid-flow / requirement-reviewer / prd-export / htmlPrototype）+ workflows 代码与模板 | “用 prd-workflow 生成产品准入功能的 PRD” |
-| `prd-generator` | mpf0418/prd-generator v1.0.0 原版复刻 | UML 用例驱动 PRD：用例模型、用例规格、数据字典、交互设计、UI 规范；简单功能/紧急需求快速一次性成文（默认入口仍是 prd-craft） | “用 UML 用例建模写这份 PRD” |
+| ~~`prd-generator`~~ | ~~mpf0418/prd-generator v1.0.0~~ | **v3.3.0 已移除独立技能**：其独有能力（UML 用例规格表、字段级数据字典）吸收为 prd-craft 增量层的「用例规格与数据字典附录」（见 `skills/prd-craft/references/dsh-enhancements.md`），触发条件为涉及数据库表/接口字段/复杂状态流转或用户点名 UML/数据字典；原“简单功能/紧急需求”场景由 prd-craft lite 模式承接 | “给这个功能补一份数据字典”（→ prd-craft 附录节） |
 | `interaction-prd` | comeonzhj/interaction-prd v0.8.0 复刻 | 门禁式（G0–G5）交互 PRD 工作台：可交互网页原型、气泡标注、页面跳转画布、本地底座；支持从 Demo 代码还原产品事实 | “把想法做成可交互的 PRD 工作台” |
 | `competitive-product-research` | v1.4.8 原版复刻 | 双轨竞品调研：体验八维（D1–D8）+ 战略诊断（SWOT/五力/PESTLE），健康度确定性评分，SRC 证据溯源 HTML/Markdown 报告 | “小红书和我们比首帖链路差在哪” |
 | `requirement-review-simulator` | v1.2.8 原版复刻 | 五角色评审攻防模拟：三级残酷度、确定性评分引擎（S/A/B/C + Go 结论）、存活率报告 + 会议资产四件套 | “模拟评审一下这份 PRD” |
@@ -16,7 +16,7 @@ DSH（DeepSeek Harness）bundle · 产品管理专家技能包。安装后向会
 
 ## 原版复刻说明
 
-6 个原版技能完整保留其 SKILL.md 正文、references、assets、模板与脚本（MIT-0 许可）。打包时做了最小化适配，均清晰标注、不涉及能力语义：① frontmatter 规范化为单行描述（多行 `>-` 块改为等价单行，便于技能目录索引），并补充独立 `whenToUse`；② 在 SKILL.md 末尾追加标注为「DSH 运行时适配（PRDCraft 注入）」的章节，映射 OpenClaw 概念到 DSH（工作区路径、agent 驱动执行、采集表单与报告模板的使用方式、与其他技能的分工让位）。所有技能共享 `prd-workspace/<项目>/` 产物目录（`interaction-prd` 的工作区在其 `interaction/` 子目录下）。
+5 个原版技能完整保留其 SKILL.md 正文、references、assets、模板与脚本（MIT-0 许可）。打包时做了最小化适配，均清晰标注、不涉及能力语义：① frontmatter 规范化为单行描述（多行 `>-` 块改为等价单行，便于技能目录索引），并补充独立 `whenToUse`；② 在 SKILL.md 末尾追加标注为「DSH 运行时适配（PRDCraft 注入）」的章节，映射 OpenClaw 概念到 DSH（工作区路径、agent 驱动执行、采集表单与报告模板的使用方式、与其他技能的分工让位）。所有技能共享 `prd-workspace/<项目>/` 产物目录（`interaction-prd` 的工作区在其 `interaction/` 子目录下）。历史注记：`prd-generator` 曾为第 7 个技能，v3.3.0 按评审裁决吸收进 prd-craft 增量层后移除。
 
 ## 安装
 
@@ -46,7 +46,7 @@ dsh plugin --profile <你的profile> remove prdcraft
 - 原版技能：对应 `skills/<名称>/` 目录；DSH 适配附注的唯一事实源在 `tools/appendices/<技能名>.md`。
 - **上游升级流程**：下载新版技能包 → `node tools/bake.mjs --skill <技能名> --src <新版目录>`（`--src` 必须与 `--skill` 连用；整包覆盖 + 上游非功能资产自动裁剪 + frontmatter 规范化 + 附注重烘焙，幂等）→ **重放本地补丁**（见下）→ `node tools/verify.mjs` 自检 → 重装 bundle。
 - **自动裁剪（PRUNE）**：bake 每次运行都会删除各技能的上游非功能资产（ClawHub 市场卡片 `skill-card.md`、发布脚本与配置、宣传截图 `docs/images/`、演示样例、过时文档 `SKILL_USAGE.md` 等，v3.1.1 实证约 1MB/20+ 文件）。裁剪清单唯一事实源在 `tools/bake.mjs` 的 `PRUNE`，`verify.mjs` 导入同一清单断言 tarball 不含这些路径——新增裁剪项只改 bake.mjs 一处。
-- **本地补丁（bake 覆盖后必须重放）**：`prd-workflow` 相对上游 v5.1.0 有两处刻意偏离，`bake --src` 整包覆盖会将其冲掉：① 子包 `package.json`（`{"type":"commonjs"}`，使 workflows 代码可在本 ESM 包中被 `node` 直接运行）；② `workflows/quality_gates.js` 中标注「PRDCraft 补全」的 gate5-9 定义。重放后跑 `verify.mjs`——两者的存活均已被断言（commonjs 断言 + gate5-9 断言），缺失即红。（`interaction-prd` 的仓库维护资产重删已由 PRUNE 自动化，无需人工。）
+- **本地补丁（bake 覆盖后必须重放）**：`prd-workflow` 相对上游 v5.1.0 有三处刻意偏离，`bake --src` 整包覆盖会将其冲掉：① 子包 `package.json`（`{"type":"commonjs"}`，使 workflows 代码可在本 ESM 包中被 `node` 直接运行）；② `workflows/quality_gates.js` 中标注「PRDCraft 补全」的 gate5-9 定义；③ `SKILL.md` 末尾「不推荐」导流表中两行改指 `prd-craft` lite 模式（标注「PRDCraft 补丁：原指 prd-generator」；上游原行指向 v3.3.0 已移除的 prd-generator）。重放后跑 `verify.mjs`——三者的存活均已被断言（commonjs 断言 + gate5-9 断言 + 导流补丁断言），缺失即红。（`interaction-prd` 的仓库维护资产重删已由 PRUNE 自动化，无需人工。）
 - `index.js` 改动需重启 DSH 生效（模块缓存）；`tools/` 与技能内容改动即时生效（每次加载重读文件）。
 
 ## 已知设计决策
@@ -60,7 +60,7 @@ dsh plugin --profile <你的profile> remove prdcraft
 ## 致谢
 
 - [prd-workflow](https://clawhub.ai/gotomanutd-dot/skills/prd-workflow) by gotomanutd + 红曼为帆（MIT-0）
-- [prd-generator](https://clawhub.ai/user/mpf0418) by mpf0418（MIT-0）
+- [prd-generator](https://clawhub.ai/user/mpf0418) by mpf0418（MIT-0）——其用例规格与数据字典模板已吸收进 prd-craft 增量层附录（v3.3.0）
 - [interaction-prd](https://github.com/comeonzhj/interaction-prd) by comeonzhj
 - [competitive-product-research](https://hub.openclaw.ai/chris1wang3/skills/competitive-product-research) by Chris Wang（MIT-0）
 - [requirement-review-simulator](https://hub.openclaw.ai/chris1wang3/skills/requirement-review-simulator) by Chris Wang（MIT-0）

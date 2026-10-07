@@ -34,7 +34,6 @@ const EXPECTED_SKILLS = [
   'idea-to-product',
   'interaction-prd',
   'prd-craft',
-  'prd-generator',
   'prd-workflow',
   'requirement-review-simulator',
 ];
@@ -119,6 +118,26 @@ for (const gate of ['gate5_flowchart', 'gate6_design', 'gate7_prototype', 'gate8
   check(new RegExp(`['"]${gate}['"]\\s*:`).test(qualityGates), `local patch present: ${gate} (lost by bake --src? see README 升级流程)`);
 }
 check(qualityGates.includes('PRDCraft 补全'), 'quality_gates.js carries PRDCraft patch marker');
+
+// v3.3.0 吸收补丁存活断言：prd-generator 已删除（吸收为 prd-craft 增量层附录），
+// 上游导流表已被补丁改指 prd-craft lite 模式（bake --src 整包覆盖会恢复原行）
+check(prdWorkflowSkill.includes('PRDCraft 补丁：原指 prd-generator'), 'local patch present: prd-workflow 导流表改指 prd-craft lite (lost by bake --src? see README 升级流程)');
+const staleRefs = [];
+for (const dir of skillDirs) {
+  const skillRootDir = join(root, 'skills', dir);
+  const walk = (d) => readdirSync(d, { withFileTypes: true }).forEach((e) => {
+    const p = join(d, e.name);
+    if (e.isDirectory()) return walk(p);
+    if (!/\.(md|js|mjs|json|py)$/u.test(e.name)) return;
+    // 历史注记行（吸收/补丁说明）不算活引用；其余 prd-generator 提及即为失效路由
+    const offending = readFileSync(p, 'utf8').split(/\r?\n/u)
+      .filter((line) => line.includes('prd-generator') && !/吸收|PRDCraft 补丁/.test(line));
+    if (offending.length > 0) staleRefs.push(p.replace(root, ''));
+  });
+  walk(skillRootDir);
+}
+check(staleRefs.length === 0, `no stale prd-generator references under skills/${staleRefs.length ? ` — found: ${staleRefs.slice(0, 3).join('; ')}` : ''}`);
+check(prdCraftSkill.includes('用例规格与数据字典附录'), 'increment layer carries absorbed use-case/data-dictionary appendix');
 
 // 真实打包产物断言（3.1.0 曾把 __pycache__/*.pyc 打进 tarball）。
 // npm cache 用独立临时目录隔离：用户全局 ~/.npm-cache 损坏（如 root 属主文件）

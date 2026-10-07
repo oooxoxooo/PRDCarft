@@ -1,8 +1,8 @@
 {
   "name": "@local/prdcraft",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "type": "module",
-  "description": "PRDCraft — PRD authoring skill pack: DSH-native orchestrator plus full replicas of prd-workflow 5.1.0 (with its 5 built-in sub-skills), prd-generator 1.0.0, interaction-prd 0.8.0, competitive-product-research 1.4.8, requirement-review-simulator 1.2.8, and idea-to-product 0.1.1.",
+  "description": "PRDCraft — PRD authoring skill pack: DSH-native orchestrator plus full replicas of prd-workflow 5.1.0 (with its 5 built-in sub-skills), interaction-prd 0.8.0, competitive-product-research 1.4.8, requirement-review-simulator 1.2.8, and idea-to-product 0.1.1. prd-generator 1.0.0 was absorbed into the prd-craft increment layer in v3.3.0.",
   "exports": {
     ".": "./index.js",
     "./package.json": "./package.json",

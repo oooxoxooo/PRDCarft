@@ -35,7 +35,6 @@ export const PRUNE = {
   'competitive-product-research': ['skill-card.md'],
   'idea-to-product': ['skill-card.md'],
   'interaction-prd': ['skill-card.md', 'docs/images'],
-  'prd-generator': ['skill-card.md'],
   'prd-workflow': [
     'skill-card.md',
     'SKILL_USAGE.md',        // 与 SKILL.md 同题重复的旧文档（阶段术语漂移、围绕 DSH 不存在的 executeForAI）
