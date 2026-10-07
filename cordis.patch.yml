@@ -1,0 +1,4 @@
+- insert:
+    - id: prdcraft
+      name: '@local/prdcraft'
+      config: {}
