@@ -139,6 +139,14 @@ for (const dir of skillDirs) {
 check(staleRefs.length === 0, `no stale prd-generator references under skills/${staleRefs.length ? ` — found: ${staleRefs.slice(0, 3).join('; ')}` : ''}`);
 check(prdCraftSkill.includes('用例规格与数据字典附录'), 'increment layer carries absorbed use-case/data-dictionary appendix');
 
+// v3.3.1 全局图规断言：所有产图技能的附注都烘焙了「流程图一律 sequenceDiagram」规则
+const seqRe = /sequenceDiagram/u;
+check(seqRe.test(readFileSync(join(root, 'skills/prd-craft/references/dsh-enhancements.md'), 'utf8')) && /全局图规/u.test(readFileSync(join(root, 'skills/prd-craft/references/dsh-enhancements.md'), 'utf8')), 'global diagram rule in increment layer');
+for (const diagSkill of ['prd-workflow', 'interaction-prd', 'idea-to-product']) {
+  const skillText = readFileSync(join(root, 'skills', diagSkill, 'SKILL.md'), 'utf8');
+  check(seqRe.test(skillText) && /全局图规/u.test(skillText), `global diagram rule baked: ${diagSkill}`);
+}
+
 // 真实打包产物断言（3.1.0 曾把 __pycache__/*.pyc 打进 tarball）。
 // npm cache 用独立临时目录隔离：用户全局 ~/.npm-cache 损坏（如 root 属主文件）
 // 不应使打包断言连锁失效（v3.1.1 时代曾因 EPERM 出现 5 项误导性红项）。

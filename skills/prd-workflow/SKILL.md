@@ -536,5 +536,6 @@ PRD 生成时复用 Wiki：
      （`require.main` CLI 入口；`openclaw`/`adm-zip` 缺失时对应能力自动降级：原型子代理跳过、DOCX 图片质检标记不可用）；Python 工具（`workflows/check_items.py`、`skills/requirement-reviewer/engines/`）用会话可用的 python3 运行。
 - **Wiki 增强** — 依赖 `~/.openclaw/workspace/wiki-ai/` 知识库目录；该目录不存在时 `wiki_search_module` 自动返回 `enabled: false` 并按标准方式执行，无需处理。
 - **输出增强（DSH 增量层）** — 两个入口产出同一 PRD 格式：时序图（Mermaid `sequenceDiagram` 源 + Excalidraw 手绘版 `diagrams/*.excalidraw`）、persona 卡、目标三分类、1.5 竞品分析、Word 导出规则，见 `<skill-directory>/../prd-craft/references/dsh-enhancements.md`（Excalidraw 转写细节在同目录 `excalidraw-guide.md`）。状态流转图保持 Mermaid `stateDiagram-v2`。
+- **全局图规（DSH 约定，优先于上游正文）** — 本技能一切**流程类**图（第 6 步流程图产物、`mermaid-flow` 子技能的流程图输出、PRD 内 2.1/3.X.3 等流程节）在 DSH 会话中一律改用 Mermaid `sequenceDiagram` 表达，不使用 `flowchart`/`graph`；写法（actor/participant、alt/else、loop、par 等）与 Excalidraw 转写规则见增量层「时序图（全局图规）」节。`mermaid-flow` 仍用于其**非流程**产物（C4 架构/上下文图、状态机），不受影响。
 - **内置子技能** — 位于 `<skill-directory>/skills/`：`ui-ux-pro-max`（设计系统）、`mermaid-flow`（流程图渲染）、`requirement-reviewer`（评审引擎）、`prd-export`（Word 导出）、`htmlPrototype`（HTML 原型）。按各自 SKILL.md 使用；生成 HTML 原型时遵循其 Chart.js + JS 校验要求。
 - **Word 导出** — 会话技能目录存在 `office-docx` 时，优先按该技能流程完成 .docx 交付与结构校验。

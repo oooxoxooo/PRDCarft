@@ -15,6 +15,7 @@ whenToUse: Writing or revising a product requirements document; exporting an exi
 - **访谈即交互**：由当前会话 agent 亲自访谈，不得委托子代理。
 - **产物落盘**：全部写入当前工作区 `prd-workspace/<项目名>/`。
 - **单一事实源**：流程、模板、检查项、门禁一律以上游资产为准（路径见下），本技能不维护第二套定义。
+- **全局图规**：一切流程类图（业务/操作/交互/页面流转）一律用 Mermaid `sequenceDiagram`，不用 `flowchart`/`graph`；状态机（`stateDiagram-v2`）与 C4 架构图等非流程结构图除外。写法见 `references/dsh-enhancements.md`。
 
 ## 路由表
 

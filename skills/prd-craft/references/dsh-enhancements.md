@@ -8,9 +8,11 @@
 - `interview.json` 以上游 SKILL.md 的输出格式为准（`sharedUnderstanding` / `keyDecisions` / `questions` 裸结构）；项目名由目录名承载，不自建包装层。
 - 迭代版本快照 `.versions/v<N>/`（含 `.version.json` 元数据），保留最近 5 个；行为对齐 `../prd-workflow/workflows/version_manager.js`。
 
-## 时序图（业务流程图增强）
+## 时序图（全局图规：流程图一律时序图）
 
-- 2.1 主业务流程图与 3.X.3 业务流程用 Mermaid `sequenceDiagram` 表达（替代 flowchart）：人用 `actor`、系统用 `participant`；分支用 `alt/else`、`opt`、`loop`、`par`、`critical` 交互块；异常分支必须画出并落到明确的结束或回退消息。
+**插件全局约定（v3.3.1 起，覆盖所有技能）**：一切**流程表达**——业务流程、操作流程、交互流程、审批/状态迁移过程、页面流转——统一用 Mermaid `sequenceDiagram` 表达，**不使用 `flowchart`/`graph`**。例外只有非流程类的结构性图：状态机用 `stateDiagram-v2`，架构/上下文用 C4（mermaid-flow 的 `C4Context`/`C4Container`），数据关系用 ER 图——它们不是流程图，不受本规约束。
+
+- 写法：人用 `actor`、系统用 `participant`；分支用 `alt/else`、`opt`、`loop`、`par`、`critical` 交互块；异常分支必须画出并落到明确的结束或回退消息。原 flowchart 的判断菱形 → `alt/else` 块；并行分支 → `par` 块。
 - 每个 Mermaid 源转写一份 Excalidraw 手绘版：`diagrams/<名称>.excalidraw`。转写规范（文件结构、元素字段、布局公式、手绘参数、自检清单）见 `<skill-directory>/references/excalidraw-guide.md`；从 prd-workflow 侧引用时路径为 `<skill-directory>/../prd-craft/references/excalidraw-guide.md`。
 - PRD 正文中：Mermaid 源代码块 + 下一行 `**手绘版**：[diagrams/xxx.excalidraw](diagrams/xxx.excalidraw)`。
 - 状态流转图保持 Mermaid `stateDiagram-v2`，不做 Excalidraw 转写。

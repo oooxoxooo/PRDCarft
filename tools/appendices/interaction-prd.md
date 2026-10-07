@@ -14,3 +14,7 @@
 - **底座代码路径注意**:上游布局存在 `assets/runtime/runtime/` 双层 `runtime` 嵌套(外层是模板分发根,内层 `server/`+`public/` 才是真正的 Node 底座)。这是上游原始结构,不做改名,引用底座文件时以 `<skill-root>/assets/runtime/runtime/` 为准。
 - 首次运行底座需要在该工作区内执行 `npm install` 与 `npm run dev`(依赖 html2canvas/marked/mermaid)。**这与「PRDCraft bundle 本体零依赖」不冲突**:bundle 安装本身零依赖零脚本;此处的依赖按需装进用户工作区,安装前按正文规则征得用户同意。
 - 会话 agent 亲自执行 G0–G5 门禁式流程并等待用户确认;`npm run validate` 在每次模块交付前运行。
+
+### 全局图规（DSH 约定）
+
+- PRD 分册与原型文档中的一切**流程类** Mermaid 图(业务流程、操作流程、模块间流转)一律用 `sequenceDiagram` 表达,不使用 `flowchart`/`graph`;写法见 `prd-craft/references/dsh-enhancements.md`「时序图(全局图规)」。状态机(`stateDiagram-v2`)等非流程结构图不受限。
